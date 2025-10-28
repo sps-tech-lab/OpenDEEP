@@ -18,7 +18,7 @@ add_executable(${PROJECT_NAME}
 )
 
 # Add pico_stdlib library which aggregates commonly used features
-target_link_libraries(${PROJECT_NAME} pico_stdlib)
+target_link_libraries(${PROJECT_NAME} pico_stdlib hardware_spi)
 
 # Create map/bin/hex/uf2 file in addition to ELF.
 pico_add_extra_outputs(${PROJECT_NAME})

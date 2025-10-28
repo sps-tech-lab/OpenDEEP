@@ -7,7 +7,7 @@ include(cmake/bringup_helper.cmake)
 include(pico_sdk_import.cmake)
 
 # Project name
-project(pico-cmake-project)
+project(OpenDEEP)
 
 # Initialize the Raspberry Pi Pico SDK
 pico_sdk_init()

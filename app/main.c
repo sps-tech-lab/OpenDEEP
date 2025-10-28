@@ -3,6 +3,6 @@
 
 int main() {
     stdio_init_all();
-    printf("Hello, world!\n");
+    printf("Hello, DEEP!\n");
     return 0;
 }

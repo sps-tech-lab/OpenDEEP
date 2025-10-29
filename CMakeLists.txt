@@ -25,3 +25,9 @@ pico_add_extra_outputs(${PROJECT_NAME})
 
 # Add ELF size table to build report
 include(cmake/pico_size_tool.cmake)
+
+# Add extension board (if it specified)
+if(DEFINED EXT_BOARD AND NOT EXT_BOARD STREQUAL "")
+    message(STATUS "Using extension board [${EXT_BOARD}] specifics")
+    include(ext_boards/${EXT_BOARD}/ext_board.cmake)
+endif()

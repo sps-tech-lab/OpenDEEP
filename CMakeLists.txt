@@ -27,6 +27,8 @@ add_executable(${PROJECT_NAME}
         src/lcd/lcd.cpp
         ${FONT_SOURCES}
         src/lcd/GC9107.cpp
+        src/lcd/demo.cpp
+        src/lcd/demo.hpp
 )
 
 # Include source files directories
@@ -40,6 +42,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 # Add pico_stdlib library which aggregates commonly used features
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
+        pico_rand
         pico_stdlib
         hardware_pwm
         hardware_spi

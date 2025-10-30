@@ -5,6 +5,7 @@
 #ifndef BSP_HPP
 #define BSP_HPP
 
+
 // ===== Display geometry =====
 #define GC9107_WIDTH   128
 #define GC9107_HEIGHT  115
@@ -25,19 +26,5 @@
 
 // ===== Optional: Wait for TE =====
 // #define USE_TE_SYNC 1
-
-// RP2040 port — SPI/GPIO
-//TODO: make normal port interface
-static inline void rp_spi_tx8(const uint8_t *data, uint32_t len) {
-    spi_write_blocking(spi0, data, len);
-}
-static inline void rp_spi_tx16(const uint16_t *data, uint32_t len) {
-    spi_write16_blocking(spi0, data, len);
-}
-static inline void rp_cs(bool level)   { gpio_put(PIN_CS,  level); }
-static inline void rp_dc(bool level)   { gpio_put(PIN_DC,  level); }
-static inline void rp_rst(bool level)  { gpio_put(PIN_RST, level); }
-static inline void rp_delay(uint32_t ms){ sleep_ms(ms); }
-static inline void rp_bl(bool on)      { gpio_put(PIN_BLK, on ? 1 : 0); }
 
 #endif //BSP_HPP

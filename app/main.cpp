@@ -10,6 +10,27 @@
 //Framebuffer
 static uint16_t fbuf[LCD_WIDTH*LCD_HEIGHT];
 
+struct object{
+    uint32_t timeout;
+    uint8_t  x;
+    uint8_t  y;
+    uint8_t  size;
+    uint16_t color;
+};
+
+void object_processing( LCD *lcd, struct object *obj ){
+    if( obj->timeout == 0 ){
+        obj->x       = get_rand_32()%GC9107_WIDTH;
+        obj->y       = get_rand_32()%GC9107_HEIGHT;
+        obj->size    = get_rand_32()%6;
+        obj->timeout = get_rand_32()%200;
+    }else{
+        obj->timeout--;
+    }
+    ( obj->timeout < 100 )?(obj->color = RGB565(obj->timeout, 0, 0)):(obj->color = RGB565(100, 0, 0));
+    lcd->drawCircle(obj->x, obj->y, obj->size, obj->color, 1, true);
+}
+
 
 // ---------------------------------------------------------
 // main()
@@ -34,18 +55,26 @@ static uint16_t fbuf[LCD_WIDTH*LCD_HEIGHT];
     // Demo
     //lcd_demo(&lcd);
 
+    //Radar objects
+    struct object o1 = {0};
+    struct object o2 = {0};
+    struct object o3 = {0};
+    struct object o4 = {0};
+    struct object o5 = {0};
 
     // Idle loop
     while (true) {
 
         lcd.fillScreen(LCD_BLACK);
 
+        object_processing(&lcd,&o1);
+        object_processing(&lcd,&o2);
+        object_processing(&lcd,&o3);
+        object_processing(&lcd,&o4);
+        object_processing(&lcd,&o5);
+
         lcd.drawLine(LCD_W_CENTER, 0, LCD_W_CENTER, GC9107_HEIGHT, LCD_DARKGREEN, 1);
         lcd.drawLine(0, LCD_H_CENTER, GC9107_WIDTH, LCD_H_CENTER, LCD_DARKGREEN, 1);
-
-        lcd.drawPoint(get_rand_32()%GC9107_WIDTH,get_rand_32()%GC9107_HEIGHT, LCD_RED, get_rand_32()%5 );
-        lcd.drawPoint(get_rand_32()%GC9107_WIDTH,get_rand_32()%GC9107_HEIGHT, LCD_RED, get_rand_32()%5 );
-        lcd.drawPoint(get_rand_32()%GC9107_WIDTH,get_rand_32()%GC9107_HEIGHT, LCD_RED, get_rand_32()%5 );
 
         lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 20, LCD_DARKGREEN, 1, true);
         lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 40, LCD_DARKGREEN, 1, false);
@@ -54,6 +83,5 @@ static uint16_t fbuf[LCD_WIDTH*LCD_HEIGHT];
         lcd.drawText(45, LCD_HEIGHT/2, "SPS", &oswald_bold_12, LCD_BLACK, LCD_DARKGREEN);
 
         lcd.update();
-        sleep_ms(100);
     }
 }

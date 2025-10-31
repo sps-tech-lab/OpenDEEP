@@ -6,6 +6,7 @@
 #include "bsp.hpp"
 #include "demo.hpp"
 #include "lcd.hpp"
+#include "bitmaps.hpp"
 
 //Framebuffer
 static uint16_t fbuf[LCD_WIDTH*LCD_HEIGHT];
@@ -54,34 +55,47 @@ void object_processing( LCD *lcd, struct object *obj ){
 
     // Demo
     //lcd_demo(&lcd);
+    lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 20, LCD_WHITE, 1, true);
+    lcd.update();
 
-    //Radar objects
-    struct object o1 = {0};
-    struct object o2 = {0};
-    struct object o3 = {0};
-    struct object o4 = {0};
-    struct object o5 = {0};
+//    //Radar objects
+//    struct object o1 = {0};
+//    struct object o2 = {0};
+//    struct object o3 = {0};
+//    struct object o4 = {0};
+//    struct object o5 = {0};
+//
+//    // Idle loop
+//    while (true) {
+//
+//        lcd.fillScreen(LCD_BLACK);
+//
+//        object_processing(&lcd,&o1);
+//        object_processing(&lcd,&o2);
+//        object_processing(&lcd,&o3);
+//        object_processing(&lcd,&o4);
+//        object_processing(&lcd,&o5);
+//
+//        lcd.drawLine(LCD_W_CENTER, 0, LCD_W_CENTER, GC9107_HEIGHT, LCD_DARKGREEN, 1);
+//        lcd.drawLine(0, LCD_H_CENTER, GC9107_WIDTH, LCD_H_CENTER, LCD_DARKGREEN, 1);
+//
+//        lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 20, LCD_DARKGREEN, 1, true);
+//        lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 40, LCD_DARKGREEN, 1, false);
+//        lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 60, LCD_DARKGREEN, 1, false);
+//        lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 100, LCD_DARKGREEN, 1, false);
+//        lcd.drawText(45, LCD_HEIGHT/2, "SPS", &oswald_bold_12, LCD_BLACK, LCD_DARKGREEN);
+//
+//        lcd.update();
+//    }
+    //lcd.draw_gImage( 0,0, gImage_ava);
 
-    // Idle loop
-    while (true) {
-
-        lcd.fillScreen(LCD_BLACK);
-
-        object_processing(&lcd,&o1);
-        object_processing(&lcd,&o2);
-        object_processing(&lcd,&o3);
-        object_processing(&lcd,&o4);
-        object_processing(&lcd,&o5);
-
-        lcd.drawLine(LCD_W_CENTER, 0, LCD_W_CENTER, GC9107_HEIGHT, LCD_DARKGREEN, 1);
-        lcd.drawLine(0, LCD_H_CENTER, GC9107_WIDTH, LCD_H_CENTER, LCD_DARKGREEN, 1);
-
-        lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 20, LCD_DARKGREEN, 1, true);
-        lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 40, LCD_DARKGREEN, 1, false);
-        lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 60, LCD_DARKGREEN, 1, false);
-        lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 100, LCD_DARKGREEN, 1, false);
-        lcd.drawText(45, LCD_HEIGHT/2, "SPS", &oswald_bold_12, LCD_BLACK, LCD_DARKGREEN);
-
+    //Halloween
+    while(1){
+        lcd.draw_gImage( 0,0, gImage_pumpkin_1);
         lcd.update();
+        sleep_ms(get_rand_32()%200);
+        lcd.draw_gImage( 0,0, gImage_pumpkin_2uo);
+        lcd.update();
+        sleep_ms(get_rand_32()%200);
     }
 }

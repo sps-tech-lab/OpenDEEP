@@ -6,7 +6,7 @@
 # / /_/ / /___/ /|  / /___/ _, _/ ___ |/ / / /___   / ____/ _, _/ /___ ___/ / /___  / /  ___/ /  #
 # \____/_____/_/ |_/_____/_/ |_/_/  |_/_/ /_____/  /_/   /_/ |_/_____//____/_____/ /_/  /____/   #
 ##################################################################################################
-#                                         SPS :: 2025                                            #
+# v.1.1                                        SPS :: 2025                                       #
 ##################################################################################################
 """
 Generate a full CMakePresets.json from a CMakePresets.json.def template
@@ -83,7 +83,7 @@ def main():
     # Write out the final CMakePresets.json
     try:
         Path(args.out_file).write_text(json.dumps(data, indent=2))
-        print(f"✅ Generated  '{args.out_file}' using generator: {args.generator}")
+        print(f"✅ Generated '{args.out_file}' using generator: {args.generator}")
     except Exception as e:
         print(f"🛑 Failed to write output '{args.out_file}': {e}", file=sys.stderr)
         sys.exit(1)

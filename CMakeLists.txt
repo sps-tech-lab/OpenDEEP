@@ -14,7 +14,7 @@ pico_sdk_init()
 
 # Collect all font sources
 file(GLOB FONT_SOURCES
-        ${CMAKE_SOURCE_DIR}/src/static_fonts/*.cpp
+        ${CMAKE_SOURCE_DIR}/src/fonts/*.cpp
 )
 
 # Add executables
@@ -35,7 +35,7 @@ add_executable(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_SOURCE_DIR}/src/platform
         ${CMAKE_SOURCE_DIR}/src/lcd
-        ${CMAKE_SOURCE_DIR}/src/static_fonts
+        ${CMAKE_SOURCE_DIR}/src/fonts
         ext_boards/${EXT_BOARD}/bsp
 )
 

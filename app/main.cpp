@@ -55,8 +55,8 @@ void object_processing( LCD *lcd, struct object *obj ){
 
     // Demo
     //lcd_demo(&lcd);
-    lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 20, LCD_WHITE, 1, true);
-    lcd.update();
+    //lcd.drawCircle(LCD_W_CENTER, LCD_H_CENTER, 20, LCD_WHITE, 1, true);
+    //lcd.update();
 
 //    //Radar objects
 //    struct object o1 = {0};
@@ -91,11 +91,7 @@ void object_processing( LCD *lcd, struct object *obj ){
 
     //Halloween
     while(1){
-        lcd.draw_gImage( 0,0, gImage_pumpkin_1);
+        lcd.drawText(28,  28, "5.4m",  &oswald_bold_48, LCD_DARKGREY, LCD_BLACK, 0);
         lcd.update();
-        sleep_ms(get_rand_32()%200);
-        lcd.draw_gImage( 0,0, gImage_pumpkin_2uo);
-        lcd.update();
-        sleep_ms(get_rand_32()%200);
     }
 }

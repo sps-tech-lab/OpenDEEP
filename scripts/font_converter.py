@@ -5,13 +5,16 @@
 #  / __/ / /_/ / /|  / / /    / /___/ /_/ / /|  / | |/ / /___/ _, _/ / / / /___/ _, _/  #
 # /_/    \____/_/ |_/ /_/     \____/\____/_/ |_/  |___/_____/_/ |_| /_/ /_____/_/ |_|   #
 #########################################################################################
-# v.1.0                               SPS :: 2025                                       #
+#  v.2.1                              SPS :: 2025                                       #
 #########################################################################################
 """
-Convert any ttf font to fixed-size font.cpp file suitable for current framebuffer version
+Convert any TTF font to dynamic-size font.cpp file with per-glyph width/height.
+
+Each glyph entry in the array:
+  [glyph_width, glyph_height, bitmap_bytes...]
 
 Usage:
-  python3 font_converter.py <your_font.ttf> -s <size>
+  python3 font_converter.py <your_font.ttf> -s <size> [-fd <y>]
 
 Arguments:
 
@@ -21,18 +24,14 @@ Arguments:
   -s, --size SIZE
         Font pixel height (default: 12)
 
-  -w, --width WIDTH
-        Font pixel width (default: auto-detect)
-        [Hint] check conversion output to see if any glyphs will be cropped
-
   -o, --output OUTPUT
-        Output .cpp file (default: font.cpp)
+        Output .cpp file (default: auto-named from font file)
 
   -fd, --fix-dash <y>
         Move '-' character up by <y> pixels during rendering
 
 Examples:
-  python3 ./scripts/font_converter.py ./Roboto-Black.ttf -s 24 -o font24.cpp
+  python3 ./font_converter.py ./Roboto-Black.ttf -s 24 -fd 2
 """
 
 import freetype
@@ -48,24 +47,29 @@ def render_glyph_bitmap(face, char, width, height, dash_offset=0):
     face.load_char(char, freetype.FT_LOAD_RENDER)
     bitmap = face.glyph.bitmap
 
-    # Create empty fixed-size buffer
-    fixed = [[0] * width for _ in range(height)]
+    # Handle space character explicitly if it renders as 0-width or invisible
+    if char == ' ' and bitmap.width == 0:
+        space_width = int(height / 3)
+        return [[0] * space_width for _ in range(height)], space_width
+
+    # Correct vertical alignment to baseline
+    baseline = height
+    y_off = baseline - face.glyph.bitmap_top
 
     # Dash offset override
-    y_off = max((height - bitmap.rows), 0)
     if char == '-' and dash_offset > 0:
         y_off = max(y_off - dash_offset, 0)
 
     # Center horizontally
-    x_off = max((width - bitmap.width) // 2, 0)
-
+    actual_width = bitmap.width
+    fixed = [[0] * actual_width for _ in range(height)]
     for y in range(min(bitmap.rows, height - y_off)):
-        for x in range(min(bitmap.width, width)):
+        for x in range(actual_width):
             pixel = bitmap.buffer[y * bitmap.width + x]
             if pixel > 128:
-                fixed[y + y_off][x + x_off] = 1
+                fixed[y + y_off][x] = 1
 
-    return fixed
+    return fixed, actual_width
 
 def pack_bitmap_rows(bitmap, width):
     bytes_per_row = math.ceil(width / 8)
@@ -89,7 +93,7 @@ def pack_bitmap_rows(bitmap, width):
     return packed
 
 def main():
-    parser = argparse.ArgumentParser(description="Convert TTF to fixed-size C++ bitmap font array")
+    parser = argparse.ArgumentParser(description="Convert TTF to fixed-height, dynamic-width C++ bitmap font array")
     parser.add_argument("font_path", help="Path to the .ttf font file")
     parser.add_argument("-s", "--size", type=int, default=12, help="Font pixel height (default: 12)")
     parser.add_argument("-w", "--width", type=int, default=None, help="Font pixel width (auto-detect if not set)")
@@ -139,29 +143,30 @@ def main():
         print(f"❌ Failed to load font: {e}")
         sys.exit(2)
 
-    bytes_per_row = math.ceil(args.width / 8)
-    bytes_per_glyph = bytes_per_row * args.size
-
     with open(args.output, "w") as out:
         out.write('#include "fonts.hpp"\n\n')
         out.write(f"const uint8_t Font{args.size}_Table [] = {{\n")
 
+        offset = 0
         for char_code in CHAR_RANGE:
             char = chr(char_code)
-            fixed_bitmap = render_glyph_bitmap(face, char, args.width, args.size, args.fix_dash)
-            packed_bytes = pack_bitmap_rows(fixed_bitmap, args.width)
+            bitmap, actual_width = render_glyph_bitmap(face, char, args.width, args.size, args.fix_dash)
+            packed = pack_bitmap_rows(bitmap, actual_width)
 
-            out.write(f"    // @{char_code * bytes_per_glyph} '{char}' ({args.width}x{args.size} pixels)\n")
-            for i in range(0, len(packed_bytes), 2):
-                b1 = f"0x{packed_bytes[i]:02X}"
-                b2 = f", 0x{packed_bytes[i+1]:02X}" if i+1 < len(packed_bytes) else ""
+            out.write(f"    // @{offset} '{char}' ({actual_width}x{args.size})\n")
+            out.write(f"    0x{actual_width:02X}, 0x{args.size:02X},\n")
+            offset += 2 + len(packed)
+
+            for i in range(0, len(packed), 2):
+                b1 = f"0x{packed[i]:02X}"
+                b2 = f", 0x{packed[i+1]:02X}" if i+1 < len(packed) else ""
                 out.write(f"    {b1}{b2},\n")
             out.write("\n")
 
         out.write("};\n\n")
-        out.write(f"font {output_base_name}(Font{args.size}_Table, {args.width}, {args.size});\n")
+        out.write(f"font {output_base_name}(Font{args.size}_Table, 0, {args.size});\n")
 
-    print(f"✅ Font generated: {args.output} ({len(CHAR_RANGE)} glyphs × {bytes_per_glyph} bytes)")
+    print(f"✅ Font generated: {args.output} with fixed height and dynamic glyph widths")
 
 if __name__ == "__main__":
     main()

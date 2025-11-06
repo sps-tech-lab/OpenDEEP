@@ -23,10 +23,11 @@ void FrameBuffer::drawPoint(uint8_t x, uint8_t y, uint16_t color, uint8_t size)
 {
     if( x >= this->width || y >= this->height ) return;
 
-        for (int16_t x_i = 0; x_i < size; x_i++)
-            for (int16_t y_i = 0; y_i < size; y_i++)
+        for (int16_t x_i = 0; x_i < size; x_i++) {
+            for (int16_t y_i = 0; y_i < size; y_i++) {
                 this->setPixel(x + x_i, y + y_i, color);
-
+            }
+        }
 }
 
 void FrameBuffer::drawLine(uint8_t x_start, uint8_t y_start, uint8_t x_end, uint8_t y_end, uint16_t color, uint8_t size)
@@ -75,27 +76,32 @@ void FrameBuffer::drawLine(uint8_t x_start, uint8_t y_start, uint8_t x_end, uint
 
 void FrameBuffer::drawHorizontalLine(uint8_t x_start, uint8_t y_start, uint8_t line_width, uint16_t color, uint8_t size)
 {
-    if(x_start > this->width || y_start > this->height)
+    if(x_start > this->width || y_start > this->height) {
         return;
+    }
     
-    for (uint8_t x_point = x_start; x_point < x_start + line_width; x_point++)
+    for (uint8_t x_point = x_start; x_point < x_start + line_width; x_point++) {
         this->drawPoint(x_point, y_start, color, size);
+    }
 }
 
 void FrameBuffer::drawVerticalLine(uint8_t x_start, uint8_t y_start, uint8_t line_height, uint16_t color, uint8_t size)
 {
-    if(x_start > this->width || y_start > this->height)
+    if(x_start > this->width || y_start > this->height) {
         return;
+    }
     
-    for (uint8_t y_point = y_start; y_point < y_start + line_height; y_point++)
+    for (uint8_t y_point = y_start; y_point < y_start + line_height; y_point++) {
         this->drawPoint(x_start, y_point, color, size);
+    }
 }
 
 
 void FrameBuffer::drawRect(uint8_t x_start, uint8_t y_start, uint8_t x_end, uint8_t y_end, uint16_t color, uint8_t size, bool fill)
 {
-    if(x_start > this->width || y_start > this->height || x_end > this->width || y_end > this->height) 
+    if(x_start > this->width || y_start > this->height || x_end > this->width || y_end > this->height) {
         return;
+    }
 
     if(fill) {
         for(uint16_t i = y_start; i < y_end; i++) {
@@ -169,56 +175,78 @@ void FrameBuffer::drawChar(uint8_t x, uint8_t y, const char ascii, font* font, u
 {
     if (x >= this->width || y >= this->height) return;
 
-    // Calculate glyph offset
-    uint8_t bytes_per_row = (font->width + 7) / 8;
-    uint32_t offset = (ascii - ' ') * font->height * bytes_per_row;
-    const uint8_t* ptr = &font->table[offset];
+    // Pointer to start of font table
+    const uint8_t* glyph = font->table;
+    char target = ascii;
 
-    for (uint8_t row = 0; row < font->height; row++) {
-        for (uint8_t col = 0; col < font->width; col++) {
-            uint8_t byte = ptr[col / 8];
+    // Skip through previous glyphs (each has [w, h, data...])
+    for (uint8_t c = 32; c < target; c++) {
+        uint8_t w = *glyph++;
+        uint8_t h = *glyph++;
+        uint8_t bytes_per_row = (w + 7) / 8;
+        glyph += bytes_per_row * h;
+    }
+
+    // Read glyph metadata
+    uint8_t glyph_width = *glyph++;
+    uint8_t glyph_height = *glyph++;
+    uint8_t bytes_per_row = (glyph_width + 7) / 8;
+
+    for (uint8_t row = 0; row < glyph_height; row++) {
+        for (uint8_t col = 0; col < glyph_width; col++) {
+            uint8_t byte = glyph[col / 8];
             bool pixel_on = byte & (0x80 >> (col % 8));
-
             this->setPixel(x + col, y + row, pixel_on ? background : foreground);
         }
-        ptr += bytes_per_row;  // Advance to next row
+        glyph += bytes_per_row; // Advance to next row
     }
 }
 
-
 void FrameBuffer::drawText(uint8_t x, uint8_t y, const char *str, font *_font, uint16_t foreground, uint16_t background)
+{
+    drawText(x, y, str, _font, foreground, background, 0);
+}
+
+void FrameBuffer::drawText(uint8_t x, uint8_t y, const char *str, font *_font, uint16_t foreground, uint16_t background, uint8_t spacing)
 {
     uint8_t x_point = x;
     uint8_t y_point = y;
 
-    if( x >= this->width || y >= this->height ) return;
+    if (x >= this->width || y >= this->height) return;
 
-    while (* str != '\0') 
+    while (*str != '\0')
     {
-        //if X direction filled , reposition to(x,y_point),y_point is Y direction plus the height of the character
-        if((x_point + _font->width) > this->width)
-        {
+        // Find glyph start to read width/height
+        const uint8_t* glyph = _font->table;
+        for (uint8_t c = 32; c < *str; c++) {
+            uint8_t w = *glyph++;
+            uint8_t h = *glyph++;
+            uint8_t bytes_per_row = (w + 7) / 8;
+            glyph += bytes_per_row * h;
+        }
+        uint8_t char_width = *glyph++;
+        uint8_t char_height = *glyph++;
+
+        // Wrap handling
+        if ((x_point + char_width) > this->width) {
             x_point = x;
-            y_point += _font->height;
+            y_point += char_height;
         }
 
-        // If the Y direction is full, reposition to(x, y)
-        if((y_point  + _font->height) > this->height)
-        {
+        if ((y_point + char_height) > this->height) {
             x_point = x;
             y_point = y;
         }
+
         this->drawChar(x_point, y_point, *str, _font, background, foreground);
 
-        //The next character of the address
+        // Move cursor forward by actual glyph width
+        x_point += char_width + spacing;
         str++;
-
-        //The next word of the abscissa increases the font of the broadband
-        x_point += _font->width;
     }
 }
 
-void FrameBuffer::drawText(uint8_t x, uint8_t y, font *_font, uint16_t foreground, uint16_t background, const char* fmt, ...)
+void FrameBuffer::drawText(uint8_t x, uint8_t y, font *_font, uint16_t foreground, uint16_t background, uint8_t spacing, const char* fmt, ...)
 {
     char buf[32];
     va_list args;
@@ -226,7 +254,7 @@ void FrameBuffer::drawText(uint8_t x, uint8_t y, font *_font, uint16_t foregroun
     vsnprintf(buf, sizeof(buf), fmt, args);
     va_end(args);
 
-    drawText(x, y, buf, _font, foreground, background);
+    drawText(x, y, buf, _font, foreground, background, spacing);
 }
 
 void FrameBuffer::darwGradientRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint16_t color1, uint16_t color2, bool direction)

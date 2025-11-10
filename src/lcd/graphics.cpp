@@ -202,17 +202,17 @@ void FrameBuffer::drawChar(uint8_t x, uint8_t y, const char ascii, font* font, u
     }
 }
 
-void FrameBuffer::drawText(uint8_t x, uint8_t y, const char *str, font *_font, uint16_t foreground, uint16_t background)
+uint32_t FrameBuffer::drawText(uint8_t x, uint8_t y, const char *str, font *_font, uint16_t foreground, uint16_t background)
 {
-    drawText(x, y, str, _font, foreground, background, 0);
+    return drawText(x, y, str, _font, foreground, background, 0);
 }
 
-void FrameBuffer::drawText(uint8_t x, uint8_t y, const char *str, font *_font, uint16_t foreground, uint16_t background, uint8_t spacing)
+uint32_t FrameBuffer::drawText(uint8_t x, uint8_t y, const char *str, font *_font, uint16_t foreground, uint16_t background, uint8_t spacing)
 {
     uint8_t x_point = x;
     uint8_t y_point = y;
 
-    if (x >= this->width || y >= this->height) return;
+    if (x >= this->width || y >= this->height) return 0;
 
     while (*str != '\0')
     {
@@ -244,9 +244,10 @@ void FrameBuffer::drawText(uint8_t x, uint8_t y, const char *str, font *_font, u
         x_point += char_width + spacing;
         str++;
     }
+    return x_point;
 }
 
-void FrameBuffer::drawText(uint8_t x, uint8_t y, font *_font, uint16_t foreground, uint16_t background, uint8_t spacing, const char* fmt, ...)
+uint32_t FrameBuffer::drawText(uint8_t x, uint8_t y, font *_font, uint16_t foreground, uint16_t background, uint8_t spacing, const char* fmt, ...)
 {
     char buf[32];
     va_list args;
@@ -254,7 +255,7 @@ void FrameBuffer::drawText(uint8_t x, uint8_t y, font *_font, uint16_t foregroun
     vsnprintf(buf, sizeof(buf), fmt, args);
     va_end(args);
 
-    drawText(x, y, buf, _font, foreground, background, spacing);
+    return drawText(x, y, buf, _font, foreground, background, spacing);
 }
 
 void FrameBuffer::darwGradientRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint16_t color1, uint16_t color2, bool direction)

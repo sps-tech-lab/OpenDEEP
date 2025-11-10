@@ -20,6 +20,7 @@ file(GLOB FONT_SOURCES
 # Add executables
 add_executable(${PROJECT_NAME}
         app/main.cpp
+        ext_boards/${EXT_BOARD}/bsp/bsp.cpp
         ext_boards/${EXT_BOARD}/bsp/bsp.hpp
         src/platform/platform.cpp
         src/lcd/graphics.cpp
@@ -29,6 +30,10 @@ add_executable(${PROJECT_NAME}
         src/lcd/GC9107.cpp
         src/lcd/demo.cpp
         src/lcd/demo.hpp
+        src/MS5837/MS5837.cpp
+        src/MS5837/MS5837.hpp
+        src/i2c_tools/i2c_tools.cpp
+        src/i2c_tools/i2c_tools.hpp
 )
 
 # Include source files directories
@@ -36,6 +41,8 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_SOURCE_DIR}/src/platform
         ${CMAKE_SOURCE_DIR}/src/lcd
         ${CMAKE_SOURCE_DIR}/src/fonts
+        ${CMAKE_SOURCE_DIR}/src/MS5837
+        ${CMAKE_SOURCE_DIR}/src/i2c_tools
         ext_boards/${EXT_BOARD}/bsp
 )
 

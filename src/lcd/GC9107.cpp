@@ -32,9 +32,9 @@ static void rp_periph_init(void) {
 
     // Temporary 3v3 on GPIO2 (LOW CURRENT ONLY!)
     // TODO: Check profit of TE line in this project
-    gpio_init(PIN_FAKE3V3);
-    gpio_set_dir(PIN_FAKE3V3, GPIO_OUT);
-    gpio_put(PIN_FAKE3V3, true);
+    gpio_init(PIN_FAKE3V3_LCD);
+    gpio_set_dir(PIN_FAKE3V3_LCD, GPIO_OUT);
+    gpio_put(PIN_FAKE3V3_LCD, true);
 }
 
 // Basic init

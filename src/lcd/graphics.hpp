@@ -58,9 +58,9 @@ struct FrameBuffer
 
     // text
     void drawChar(uint8_t, uint8_t, const char, font*, uint16_t, uint16_t);
-    void drawText(uint8_t, uint8_t, const char *, font*, uint16_t, uint16_t);
-    void drawText(uint8_t, uint8_t, const char *, font*, uint16_t, uint16_t, uint8_t);
-    void drawText(uint8_t, uint8_t, font*, uint16_t, uint16_t, uint8_t, const char* fmt, ...);
+    uint32_t drawText(uint8_t, uint8_t, const char *, font*, uint16_t, uint16_t);
+    uint32_t drawText(uint8_t, uint8_t, const char *, font*, uint16_t, uint16_t, uint8_t);
+    uint32_t drawText(uint8_t, uint8_t, font*, uint16_t, uint16_t, uint8_t, const char* fmt, ...);
 
     /**
      * @brief Draw a full-color bitmap.

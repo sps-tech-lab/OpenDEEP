@@ -41,16 +41,9 @@ create a new in CMakePresets.json.def and run ```generate_presets.py ```again
 #### Command Line
 For command line it would be:
 ```
-cmake --preset <YourBoardPreset>
-cmake --build --preset <YourBoardPreset>
-```
-
-After it, edit `CMakeLists.txt` in `<root_folder>`:
-```cmake
-# rename
-project(pico-cmake-project)
-# to
-project(your_project_name)
+cmake --list-presets
+cmake --preset "Waveshare_rp2040_pizero"
+cmake --build --preset "Waveshare_rp2040_pizero"
 ```
 
 ---

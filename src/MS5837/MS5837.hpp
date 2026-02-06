@@ -75,7 +75,7 @@ private:
 
     uint8_t         readbuf[4] = {0};
     uint16_t        calibration[8] = {0};
-    uint16_t        density{997};
+    uint16_t        water_density{997};
     uint32_t        raw_pressure{0};
     uint32_t        raw_temperature{0};
     int32_t         compensated_pressure{0};

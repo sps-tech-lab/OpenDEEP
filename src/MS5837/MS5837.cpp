@@ -154,9 +154,17 @@ float PresTempSensor::temperature() const
     return static_cast<float>(this->compensated_temperature)/100.0f;
 }
 
+float PresTempSensor::depth() const
+{
+    const float temp_depth = (static_cast<float>(this->compensated_pressure - this->atmospheric_pressure)
+         / (static_cast<float>(this->water_density) * 9.80665f));
+
+    return (temp_depth > 0.0f) ? temp_depth : 0.0f;
+}
+
 void PresTempSensor::set_water_density(const uint16_t density)
 {
-    this->density = density;
+    this->water_density = density;
 }
 
 

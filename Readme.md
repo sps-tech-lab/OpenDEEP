@@ -1,32 +1,42 @@
 
-# PICO CMAKE PROJECT
+# OpenDEEP
 
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/sps-tech-lab/pico-cmake-project?label=version)
-![License](https://img.shields.io/github/license/sps-tech-lab/pico-cmake-project)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/sps-tech-lab/OpenDEEP?label=version)
+![License](https://img.shields.io/badge/license-GPLv3-green.svg?style=flat)
+
+A battery-powered **free-diving depth gauge prototype** built end-to-end around **MS5837** pressure sensing.
+Current prototype targets **0–10 m** depth range and serves as a base for expanding features and power optimization.
+
+![Appearance](./docs/img/open_deep_poster.png)
+
+#### Hardware
+- MCU: **RP2040**
+- Display: **IPS 0.99 inch**
+- Pressure / temperature sensor: **MS5837-02BA**
+
+#### Roadmap
+- Ultra-low-power variant on **PR2350 / nRF52832**
+- Zephyr OS port
+- Accelerometer
+- Magnetic field sensor 
 
 ---
 
-## About
-Here's a CMake project template for RP2040/3050 microcontrollers, 
-designed to give new projects a quick and easy start.
-
----
-
-## Getting Started
+### Getting Started
 After cloning the repo, run:
 
 ```
 python3 scripts/generate_presets.py --generator Ninja
 ```
-This will produce CMakePresets.json from CMakePresets.json.def using your generator
+This script will produce CMakePresets.json from CMakePresets.json.def using your generator
 
 ```Ninja / "Unix Makefiles" / "Visual Studio 17 2022" / "MinGW Makefiles"```
 
-#### Clion 
+#### CLion
 In CLion go: 
 ```Settings``` → ```Build, Execution, Deployment``` → ```CMake```
 and choose one of profiles. If there is no one that satisfy you, 
-create a new in CMakePresets.json.def and run ```bootstrap_presets.py ```again
+create a new in CMakePresets.json.def and run ```generate_presets.py ```again
 
 #### Command Line
 For command line it would be:

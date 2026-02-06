@@ -20,7 +20,8 @@
       "name":      "Waveshare_rp2040_pizero",
       "binaryDir": "${sourceDir}/build/waveshare_rp2040_pizero",
       "cacheVariables": {
-        "PICO_BOARD": "waveshare_rp2040_pizero"
+        "PICO_BOARD": "waveshare_rp2040_pizero",
+        "EXT_BOARD": "opendeep.pba001.v01"
       },
       "environment": {
         "PICO_SDK_PATH": "../../../pico-sdk"

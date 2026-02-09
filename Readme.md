@@ -3,6 +3,8 @@
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/sps-tech-lab/OpenDEEP?label=version)
 ![License](https://img.shields.io/badge/license-GPLv3-green.svg?style=flat)
+![CI](https://github.com/sps-tech-lab/OpenDEEP/actions/workflows/ci.yml/badge.svg?branch=main)
+
 
 A battery-powered **free-diving depth gauge prototype** built end-to-end around **MS5837** pressure sensing.
 Current prototype targets **0–10 m** depth range and serves as a base for expanding features and power optimization.
@@ -41,16 +43,9 @@ create a new in CMakePresets.json.def and run ```generate_presets.py ```again
 #### Command Line
 For command line it would be:
 ```
-cmake --preset <YourBoardPreset>
-cmake --build --preset <YourBoardPreset>
-```
-
-After it, edit `CMakeLists.txt` in `<root_folder>`:
-```cmake
-# rename
-project(pico-cmake-project)
-# to
-project(your_project_name)
+cmake --list-presets
+cmake --preset "Waveshare_rp2040_pizero"
+cmake --build --preset "Waveshare_rp2040_pizero"
 ```
 
 ---

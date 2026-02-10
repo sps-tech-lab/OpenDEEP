@@ -11,8 +11,8 @@
  * @brief OverSampling Ratio of ADC conversion
  */
 enum class MS5837osr : uint16_t {
-    osr256  = 256,
-    osr512  = 512,
+    osr256 = 256,
+    osr512 = 512,
     osr1024 = 1024,
     osr2048 = 2048,
     osr4096 = 4096,
@@ -23,8 +23,7 @@ enum class MS5837osr : uint16_t {
  * @brief   Pressure/Temperature Sensor class
  * @details Basic Pressure & Temperature Sensor methods
  */
-class PresTempSensor
-{
+class PresTempSensor {
 public:
     PresTempSensor();
     ~PresTempSensor();
@@ -67,20 +66,20 @@ public:
     void set_water_density(uint16_t density);
 
 private:
-    static uint8_t  crc4(uint16_t n_prom[]);
-    uint16_t*       get_calibration_data();
-    bool            read_pressure(MS5837osr osr);
-    bool            read_temperature(MS5837osr osr);
-    void            calculate();
+    static uint8_t crc4(uint16_t n_prom[]);
+    uint16_t* get_calibration_data();
+    bool read_pressure(MS5837osr osr);
+    bool read_temperature(MS5837osr osr);
+    void calculate();
 
-    uint8_t         readbuf[4] = {0};
-    uint16_t        calibration[8] = {0};
-    uint16_t        water_density{997};
-    uint32_t        raw_pressure{0};
-    uint32_t        raw_temperature{0};
-    int32_t         compensated_pressure{0};
-    int32_t         compensated_temperature{0};
-    int32_t         atmospheric_pressure{0};
+    uint8_t readbuf[4] = {0};
+    uint16_t calibration[8] = {0};
+    uint16_t water_density{997};
+    uint32_t raw_pressure{0};
+    uint32_t raw_temperature{0};
+    int32_t compensated_pressure{0};
+    int32_t compensated_temperature{0};
+    int32_t atmospheric_pressure{0};
     // //Ref.: MS5837-02BA Datasheet REV A8 12/2019
     // int32_t         diff_temperature{0};            // dT
     // int64_t         off_temperature{0};             // OFF
@@ -93,6 +92,4 @@ private:
     // int64_t SENS2 = 0;
 };
 
-
-
-#endif //OPENDEEP_MS5837_HPP
+#endif // OPENDEEP_MS5837_HPP

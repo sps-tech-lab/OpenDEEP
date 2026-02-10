@@ -3,25 +3,23 @@
 //
 #include "platform.hpp"
 #include <stdio.h>
-#include "pico/stdlib.h"
-#include "hardware/pwm.h"
-#include "hardware/spi.h"
 #include "hardware/dma.h"
 #include "hardware/i2c.h"
+#include "hardware/pwm.h"
+#include "hardware/spi.h"
+#include "pico/stdlib.h"
 
-//Local data
-static struct
-{
-    uint    slice;
-    int     dma_channel;
-}platform;
+// Local data
+static struct {
+    uint slice;
+    int dma_channel;
+} platform;
 
 /**
  * @brief core hardware initialization
  * @return result of initialization (not implemented)
  */
-bool platform_init()
-{
+bool platform_init() {
     // //LCD gpio config
     // gpio_init(WAVESHARE_LCD_DC_PIN);
     // gpio_init(WAVESHARE_LCD_CS_PIN);
@@ -75,8 +73,7 @@ bool platform_init()
  * @brief backlight brightness level setter
  * @param level - 0..100% brightness
  */
-void platform_set_backlight_level(uint8_t level)
-{
+void platform_set_backlight_level(uint8_t level) {
     // if(( level < 0 )||( level > 100 )){
     //     printf("[Error] wrong backlight_level\r\n");
     // }else{
@@ -88,7 +85,6 @@ void platform_set_backlight_level(uint8_t level)
  * @brief dma channel getter
  * @return dma_channel
  */
-int platform_get_dma_channel()
-{
+int platform_get_dma_channel() {
     return platform.dma_channel;
 }

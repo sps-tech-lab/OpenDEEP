@@ -3,16 +3,16 @@
 
 #include <stdint.h>
 
-struct font
-{
-    const uint8_t *table;
+struct font {
+    const uint8_t* table;
     uint8_t width;
     uint8_t height;
 
-    font(const uint8_t* _table, uint8_t _width, uint8_t _height): table(_table), width(_width), height(_height){};
+    font(const uint8_t* _table, uint8_t _width, uint8_t _height)
+        : table(_table), width(_width), height(_height){};
 };
 
-//Oswald fonts
+// Oswald fonts
 extern font oswald_light_12;
 extern font oswald_light_16;
 extern font oswald_light_20;
@@ -38,6 +38,5 @@ extern font oswald_bold_24;
 extern font oswald_bold_36;
 
 extern font oswald_bold_48;
-
 
 #endif

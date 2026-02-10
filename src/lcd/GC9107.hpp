@@ -2,6 +2,8 @@
 // Created by SPS on 29/10/2025.
 //
 
+#include <cstdint>
+
 // DCS commands
 #define GC9107_SWRESET 0x01
 #define GC9107_SLPIN   0x10

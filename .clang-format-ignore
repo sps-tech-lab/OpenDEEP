@@ -2,6 +2,8 @@ build/
 cmake-build-*/
 generated/
 
+src/fonts/*.cpp
+
 pico-sdk/
 picotool/
 external/

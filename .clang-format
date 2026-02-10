@@ -5,7 +5,7 @@ IndentWidth: 4
 TabWidth: 4
 UseTab: Never
 
-ColumnLimit: 100
+ColumnLimit: 120
 
 AccessModifierOffset: -4
 
@@ -13,7 +13,7 @@ InsertBraces: true
 
 BreakBeforeBraces: Attach
 AllowShortBlocksOnASingleLine: Never
-AllowShortIfStatementsOnASingleLine: Never
+AllowShortIfStatementsOnASingleLine: WithoutElse
 AllowShortLoopsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: Inline
 
@@ -21,14 +21,21 @@ PointerAlignment: Left
 ReferenceAlignment: Left
 DerivePointerAlignment: false
 
-SpaceBeforeParens: ControlStatements
+SpaceBeforeParens: Never
 SpacesInParentheses: false
 SpaceInEmptyParentheses: false
+SpacesInConditionalStatement: true
 
 AlignAfterOpenBracket: Align
 AlignOperands: Align
 AlignConsecutiveAssignments: None
 AlignConsecutiveDeclarations: None
+
+AlignConsecutiveMacros: Consecutive
+AlignTrailingComments: true
+
+PackConstructorInitializers: NextLineOnly
+BreakConstructorInitializers: BeforeColon
 
 BinPackArguments: true
 BinPackParameters: true

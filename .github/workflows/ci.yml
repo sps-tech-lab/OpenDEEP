@@ -131,14 +131,9 @@ jobs:
             echo "No .clang-format found -> skipping format check."
             exit 0
           fi
-          files=$(git ls-files \
-            '*.c' '*.cc' '*.cpp' '*.cxx' '*.h' '*.hh' '*.hpp' '*.hxx' \
-            ':!third_party/**' ':!build/**' || true)
-          if [[ -z "$files" ]]; then
-            echo "No source files found for clang-format."
-            exit 0
-          fi
-          echo "$files" | xargs -r clang-format --dry-run --Werror
+          clang-format --version
+          chmod +x ./scripts/check-format.sh
+          ./scripts/check-format.sh
 
       - name: Upload firmware artifacts
         if: always()

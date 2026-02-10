@@ -104,3 +104,28 @@ the correct pico_arm_cortex_m0plus_gcc.cmake toolchain file, and your macOS buil
    arm-none-eabi-gcc --version
    ```
    You should see the version banner instead of “command not found.”
+
+---
+
+## Code style
+
+Rules for auto-formatting are described in the ```.clang-format``` file.
+All third_party libraries should be excluded from auto-formatting in the ```.clang-format-ignore``` file.
+
+> [!TIP]
+> This repository enforces formatting in CI. Pull requests will fail if code is not formatted.
+
+Format:
+```bash
+  ./scripts/clang-format.sh
+```
+
+Check:
+```bash
+  ./scripts/check-format.sh
+```
+Make it executable(in case):
+```bash
+chmod +x clang-format.sh
+chmod +x check-format.sh
+```

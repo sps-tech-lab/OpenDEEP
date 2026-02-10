@@ -8,6 +8,6 @@
 
 bool platform_init();
 void platform_set_backlight_level(uint8_t level);
-int  platform_get_dma_channel();
+int platform_get_dma_channel();
 
-#endif //PLATFORM_H
+#endif // PLATFORM_H

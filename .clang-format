@@ -1,6 +1,3 @@
-#
-# Created by :: SPS :: on 09.02.2026.
-#
 BasedOnStyle: LLVM
 Language: Cpp
 

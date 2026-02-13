@@ -1,7 +1,7 @@
 #include "graphics.hpp"
 #include <cstdarg>
 #include <cstdio>
-#include <stdint.h>
+#include <cstdint>
 #include <stdlib.h>
 
 FrameBuffer::FrameBuffer(uint16_t* _canvas, uint8_t _width, uint8_t _height) {

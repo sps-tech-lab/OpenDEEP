@@ -3,13 +3,14 @@ Checks: >
   clang-analyzer-*,
   bugprone-*,
   performance-*,
-  readability-*,
   modernize-*,
   misc-*,
 
-  -readability-magic-numbers,
   -modernize-use-trailing-return-type,
   -modernize-use-nodiscard,
+  -modernize-macro-to-enum,
+  -modernize-use-using,
+  -bugprone-easily-swappable-parameters,
   -misc-include-cleaner,
   -misc-non-private-member-variables-in-classes,
   -misc-const-correctness

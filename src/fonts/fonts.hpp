@@ -1,7 +1,7 @@
-#ifndef __FONTS_H
-#define __FONTS_H
+#ifndef FONTS_H
+#define FONTS_H
 
-#include <stdint.h>
+#include <cstdint>
 
 struct font {
     const uint8_t* table;

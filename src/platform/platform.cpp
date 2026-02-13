@@ -2,14 +2,13 @@
 // Created by SPS on 28/05/2025.
 //
 #include "platform.hpp"
-#include <cstdio>
 #include <cstdint>
+#include <cstdio>
 // #include "hardware/dma.h"
 // #include "hardware/i2c.h"
 // #include "hardware/pwm.h"
 // #include "hardware/spi.h"
 // #include "pico/stdlib.h"
-
 
 // Local data
 // static struct {
@@ -88,6 +87,6 @@ void platform_set_backlight_level(uint8_t level) {
  * @return dma_channel
  */
 int platform_get_dma_channel() {
-    //return platform.dma_channel;
-    return 0; //Draft
+    // return platform.dma_channel;
+    return 0; // Draft
 }

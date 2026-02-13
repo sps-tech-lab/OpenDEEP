@@ -11,6 +11,7 @@
 #define I2C_PORT i2c1
 
 // MS5837 basic commands
+// clang-format off
 constexpr uint8_t MS5837_ADDRESS      = 0x76;
 constexpr uint8_t MS5837_RESET        = 0x1E;
 constexpr uint8_t MS5837_DP_CONV_256  = 0x40;
@@ -27,6 +28,7 @@ constexpr uint8_t MS5837_DT_CONV_4096 = 0x58;
 constexpr uint8_t MS5837_DT_CONV_8192 = 0x5A;
 constexpr uint8_t MS5837_ADC_READ     = 0x00;
 constexpr uint8_t MS5837_READ_PROM    = 0xA0;
+// clang-format on
 
 // MS5837 calibration data
 #define MS5837_CALIB_DATA_LEN (7)

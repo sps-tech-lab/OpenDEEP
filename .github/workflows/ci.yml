@@ -54,7 +54,7 @@ jobs:
           sudo apt-get install -y \
             ninja-build cmake build-essential \
             gcc-arm-none-eabi libnewlib-arm-none-eabi \
-            clang-format
+            clang-format clang-tidy
 
       - name: Verify pico-sdk
         run: |
@@ -73,14 +73,14 @@ jobs:
       - name: Build
         run: cmake --build --preset "${{ matrix.preset }}"
 
-      - name: Generate size report
+      - name: Resolve build dir
+        id: builddir
         shell: bash
         env:
           PRESET: ${{ matrix.preset }}
         run: |
           set -euo pipefail
 
-          # Find cache for this preset
           CACHE="$(find build -type f -name CMakeCache.txt -path "*${PRESET}*" -print -quit || true)"
           if [[ -z "${CACHE}" ]]; then
             CACHE="$(find build -type f -name CMakeCache.txt -print -quit || true)"
@@ -91,7 +91,16 @@ jobs:
           fi
 
           BUILD_DIR="$(dirname "${CACHE}")"
-          echo "BUILD_DIR=${BUILD_DIR}"
+          echo "build_dir=${BUILD_DIR}" >> "$GITHUB_OUTPUT"
+          echo "Resolved BUILD_DIR=${BUILD_DIR}"
+
+      - name: Generate size report
+        shell: bash
+        env:
+          PRESET: ${{ matrix.preset }}
+        run: |
+          set -euo pipefail
+          BUILD_DIR="${{ steps.builddir.outputs.build_dir }}"
 
           # Find ELF in build dir
           ELF="$(find "${BUILD_DIR}" -type f -name '*.elf' -print -quit || true)"
@@ -134,6 +143,15 @@ jobs:
           clang-format --version
           chmod +x ./scripts/check-format.sh
           ./scripts/check-format.sh
+
+      - name: clang-tidy
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.tidy_check }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          clang-tidy --version || true
+          chmod +x ./scripts/clang-tidy.sh
+          ./scripts/clang-tidy.sh "${{ steps.builddir.outputs.build_dir }}"
 
       - name: Upload firmware artifacts
         if: always()

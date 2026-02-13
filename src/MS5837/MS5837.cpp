@@ -11,22 +11,24 @@
 #define I2C_PORT i2c1
 
 // MS5837 basic commands
-#define MS5837_ADDRESS      0x76
-#define MS5837_RESET        0x1E
-#define MS5837_DP_CONV_256  0x40
-#define MS5837_DP_CONV_512  0x42
-#define MS5837_DP_CONV_1024 0x44
-#define MS5837_DP_CONV_2048 0x46
-#define MS5837_DP_CONV_4096 0x48
-#define MS5837_DP_CONV_8192 0x4A
-#define MS5837_DT_CONV_256  0x50
-#define MS5837_DT_CONV_512  0x52
-#define MS5837_DT_CONV_1024 0x54
-#define MS5837_DT_CONV_2048 0x56
-#define MS5837_DT_CONV_4096 0x58
-#define MS5837_DT_CONV_8192 0x5A
-#define MS5837_ADC_READ     0x00
-#define MS5837_READ_PROM    0xA0
+// clang-format off
+constexpr uint8_t MS5837_ADDRESS      = 0x76;
+constexpr uint8_t MS5837_RESET        = 0x1E;
+constexpr uint8_t MS5837_DP_CONV_256  = 0x40;
+constexpr uint8_t MS5837_DP_CONV_512  = 0x42;
+constexpr uint8_t MS5837_DP_CONV_1024 = 0x44;
+constexpr uint8_t MS5837_DP_CONV_2048 = 0x46;
+constexpr uint8_t MS5837_DP_CONV_4096 = 0x48;
+constexpr uint8_t MS5837_DP_CONV_8192 = 0x4A;
+constexpr uint8_t MS5837_DT_CONV_256  = 0x50;
+constexpr uint8_t MS5837_DT_CONV_512  = 0x52;
+constexpr uint8_t MS5837_DT_CONV_1024 = 0x54;
+constexpr uint8_t MS5837_DT_CONV_2048 = 0x56;
+constexpr uint8_t MS5837_DT_CONV_4096 = 0x58;
+constexpr uint8_t MS5837_DT_CONV_8192 = 0x5A;
+constexpr uint8_t MS5837_ADC_READ     = 0x00;
+constexpr uint8_t MS5837_READ_PROM    = 0xA0;
+// clang-format on
 
 // MS5837 calibration data
 #define MS5837_CALIB_DATA_LEN (7)

@@ -4,6 +4,7 @@
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/sps-tech-lab/OpenDEEP?label=version)
 ![License](https://img.shields.io/badge/license-GPLv3-green.svg?style=flat)
 ![CI](https://github.com/sps-tech-lab/OpenDEEP/actions/workflows/ci.yml/badge.svg?branch=main)
+![clang-tidy](https://github.com/sps-tech-lab/OpenDEEP/actions/workflows/clang-tidy.yml/badge.svg?branch=main)
 
 
 A battery-powered **free-diving depth gauge prototype** built end-to-end around **MS5837** pressure sensing.
@@ -117,12 +118,12 @@ All third_party libraries should be excluded from auto-formatting in the ```.cla
 
 Format:
 ```bash
-  ./scripts/clang-format.sh
+./scripts/clang-format.sh
 ```
 
 Check:
 ```bash
-  ./scripts/check-format.sh
+./scripts/check-format.sh
 ```
 Make it executable(in case):
 ```bash

@@ -2,18 +2,19 @@
 // Created by SPS on 28/05/2025.
 //
 #include "platform.hpp"
-#include <stdio.h>
-#include "hardware/dma.h"
-#include "hardware/i2c.h"
-#include "hardware/pwm.h"
-#include "hardware/spi.h"
-#include "pico/stdlib.h"
+#include <cstdint>
+#include <cstdio>
+// #include "hardware/dma.h"
+// #include "hardware/i2c.h"
+// #include "hardware/pwm.h"
+// #include "hardware/spi.h"
+// #include "pico/stdlib.h"
 
 // Local data
-static struct {
-    uint slice;
-    int dma_channel;
-} platform;
+// static struct {
+//     uint32_t slice;
+//     int dma_channel;
+// } platform;
 
 /**
  * @brief core hardware initialization
@@ -86,5 +87,6 @@ void platform_set_backlight_level(uint8_t level) {
  * @return dma_channel
  */
 int platform_get_dma_channel() {
-    return platform.dma_channel;
+    // return platform.dma_channel;
+    return 0; // Draft
 }

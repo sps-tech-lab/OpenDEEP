@@ -1,5 +1,5 @@
 #include "lcd.hpp"
-#include <stdio.h>
+#include <cstdio>
 #include "GC9107.hpp"
 #include "bsp.hpp"
 #include "graphics.hpp"

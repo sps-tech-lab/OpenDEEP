@@ -1,5 +1,5 @@
-#ifndef __LCD_H
-#define __LCD_H
+#ifndef LCD_HPP
+#define LCD_HPP
 
 #include <cstdint>
 #include "bsp.hpp"

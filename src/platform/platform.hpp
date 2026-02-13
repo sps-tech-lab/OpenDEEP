@@ -4,7 +4,7 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
-#include <stdint.h>
+#include <cstdint>
 
 bool platform_init();
 void platform_set_backlight_level(uint8_t level);

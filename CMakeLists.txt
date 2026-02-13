@@ -12,6 +12,9 @@ project(OpenDEEP)
 # Initialize the Raspberry Pi Pico SDK
 pico_sdk_init()
 
+# Generate compile_commands.json
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Collect all font sources
 file(GLOB FONT_SOURCES
         ${CMAKE_SOURCE_DIR}/src/fonts/*.cpp

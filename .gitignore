@@ -16,3 +16,5 @@ third_party/picotool
 CMakePresets.json
 
 .idea/
+
+hw/opendeep.pba001.eval.v01/opendeep.pba001.eval.v01_backup/

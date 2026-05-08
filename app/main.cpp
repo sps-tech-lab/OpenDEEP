@@ -23,7 +23,7 @@ static uint16_t fbuf[LCD_WIDTH * LCD_HEIGHT];
     lcd.update();
 
     // Backlight on
-    gpio_put(PIN_BLK, true);
+    gpio_put(PIN_LCD_BLK, true);
 
     // Logo
     lcd.drawText(15, 47, &oswald_bold_24, LCD_DARKGREY, LCD_BLACK, 2, "OpenDEEP");

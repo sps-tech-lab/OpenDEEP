@@ -31,34 +31,34 @@ LCD::LCD(uint16_t* canvas, uint8_t direction)
 }
 
 void LCD::reset() {
-    gpio_put(PIN_RST, true);
+    gpio_put(PIN_LCD_RST, true);
     sleep_ms(100);
-    gpio_put(PIN_RST, false);
+    gpio_put(PIN_LCD_RST, false);
     sleep_ms(100);
-    gpio_put(PIN_RST, true);
-    gpio_put(PIN_CS, false);
+    gpio_put(PIN_LCD_RST, true);
+    gpio_put(PIN_LCD_CS, false);
     sleep_ms(100);
 }
 
 void LCD::command(uint8_t _command) {
-    gpio_put(PIN_DC, false);
-    gpio_put(PIN_CS, false);
-    spi_write_blocking(SPI_INSTANCE(PICO_DEFAULT_SPI), &_command, 1);
-    gpio_put(PIN_CS, true);
+    gpio_put(PIN_LCD_DC, false);
+    gpio_put(PIN_LCD_CS, false);
+    spi_write_blocking(LCD_SPI_PORT, &_command, 1);
+    gpio_put(PIN_LCD_CS, true);
 }
 
 void LCD::data(uint8_t _data) {
-    gpio_put(PIN_DC, true);
-    gpio_put(PIN_CS, false);
-    spi_write_blocking(SPI_INSTANCE(PICO_DEFAULT_SPI), &_data, 1);
-    gpio_put(PIN_CS, true);
+    gpio_put(PIN_LCD_DC, true);
+    gpio_put(PIN_LCD_CS, false);
+    spi_write_blocking(LCD_SPI_PORT, &_data, 1);
+    gpio_put(PIN_LCD_CS, true);
 }
 
 void LCD::data_buf(const uint8_t* _buf, uint8_t _len) {
-    gpio_put(PIN_DC, true);
-    gpio_put(PIN_CS, false);
-    spi_write_blocking(SPI_INSTANCE(PICO_DEFAULT_SPI), _buf, _len);
-    gpio_put(PIN_CS, true);
+    gpio_put(PIN_LCD_DC, true);
+    gpio_put(PIN_LCD_CS, false);
+    spi_write_blocking(LCD_SPI_PORT, _buf, _len);
+    gpio_put(PIN_LCD_CS, true);
 }
 
 void LCD::set_window(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1) {
@@ -81,9 +81,9 @@ void LCD::set_window(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1) {
 
 void LCD::init_reg() {
     // HW reset
-    gpio_put(PIN_RST, false);
+    gpio_put(PIN_LCD_RST, false);
     sleep_ms(10);
-    gpio_put(PIN_RST, true);
+    gpio_put(PIN_LCD_RST, true);
     sleep_ms(120);
 
     // SW reset
@@ -118,7 +118,7 @@ void LCD::init_reg() {
     this->command(GC9107_DISPON);
     sleep_ms(50);
 
-    gpio_put(PIN_BLK, true);
+    gpio_put(PIN_LCD_BLK, true);
 }
 
 void LCD::set_direction(uint8_t _direction) {
@@ -139,15 +139,15 @@ void LCD::update() {
     this->set_window(0, 0, LCD_WIDTH - 1, LCD_HEIGHT - 1);
 
     // Switch into 16-bit mode for bulk pixel data
-    spi_set_format(SPI_INSTANCE(PICO_DEFAULT_SPI), 16, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
+    spi_set_format(LCD_SPI_PORT, 16, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
 
-    gpio_put(PIN_DC, true);
-    gpio_put(PIN_CS, false);
+    gpio_put(PIN_LCD_DC, true);
+    gpio_put(PIN_LCD_CS, false);
 
-    spi_write16_blocking(SPI_INSTANCE(PICO_DEFAULT_SPI), this->canvas, size_t(LCD_WIDTH) * LCD_HEIGHT);
+    spi_write16_blocking(LCD_SPI_PORT, this->canvas, size_t(LCD_WIDTH) * LCD_HEIGHT);
 
-    gpio_put(PIN_CS, true);
+    gpio_put(PIN_LCD_CS, true);
 
     // Back to 8-bit
-    spi_set_format(SPI_INSTANCE(PICO_DEFAULT_SPI), 8, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
+    spi_set_format(LCD_SPI_PORT, 8, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
 }

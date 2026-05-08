@@ -21,7 +21,17 @@
       "binaryDir": "${sourceDir}/build/waveshare_rp2040_pizero",
       "cacheVariables": {
         "PICO_BOARD": "waveshare_rp2040_pizero",
-        "EXT_BOARD": "opendeep.pba001.v01"
+        "EXT_BOARD": "opendeep.pba001.pizero.v01"
+      },
+      "environment": {
+        "PICO_SDK_PATH": "${sourceDir}/third_party/pico-sdk"
+      }
+    },
+    {
+      "name":      "OpenDEEP_rp2040_CNC",
+      "binaryDir": "${sourceDir}/build/opendeep_rp2040_cnc",
+      "cacheVariables": {
+        "EXT_BOARD": "opendeep.pba001.cnc.v01"
       },
       "environment": {
         "PICO_SDK_PATH": "${sourceDir}/third_party/pico-sdk"

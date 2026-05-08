@@ -10,8 +10,8 @@
 #define GC9107_HEIGHT 115
 
 // ===== Pin map =====
-#define PIN_LCD_SCK     10
-#define PIN_LCD_MOSI    11
+#define PIN_LCD_SCK     10 // LCD SCL
+#define PIN_LCD_MOSI    11 // LCD SDA
 #define PIN_LCD_CS      9
 #define PIN_LCD_DC      14 // LCD Data/Command
 #define PIN_LCD_RST     12 // LCD Reset

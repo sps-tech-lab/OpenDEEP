@@ -7,9 +7,9 @@
 #include "pico/stdlib.h"
 
 void bsp_i2c_init() {
-    i2c_init(i2c1, 400 * 1000);
-    gpio_set_function(PIN_I2C_SDA, GPIO_FUNC_I2C);
-    gpio_set_function(PIN_I2C_SCL, GPIO_FUNC_I2C);
-    gpio_pull_up(PIN_I2C_SDA);
-    gpio_pull_up(PIN_I2C_SCL);
+    i2c_init(BSP_I2C_PORT, 400 * 1000);
+    gpio_set_function(BSP_I2C_SDA, GPIO_FUNC_I2C);
+    gpio_set_function(BSP_I2C_SCL, GPIO_FUNC_I2C);
+    gpio_pull_up(BSP_I2C_SDA);
+    gpio_pull_up(BSP_I2C_SCL);
 }

@@ -36,9 +36,7 @@ constexpr uint8_t MS5837_READ_PROM    = 0xA0;
 PresTempSensor::PresTempSensor() = default;
 
 bool PresTempSensor::init() {
-    gpio_init(PIN_FAKE3V3_MS5);
-    gpio_set_dir(PIN_FAKE3V3_MS5, GPIO_OUT);
-    gpio_put(PIN_FAKE3V3_MS5, true);
+    bsp_ps_init();
 
     sleep_ms(10);
 

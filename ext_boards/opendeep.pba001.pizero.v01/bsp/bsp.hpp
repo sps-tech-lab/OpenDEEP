@@ -18,7 +18,7 @@
 #define PIN_LCD_BLK     13 // Backlight control pin (HIGH=on) -> drive transistor / BL pin
 #define PIN_LCD_TE      15 // TE input (tearing effect)
 #define PIN_FAKE3V3_LCD 2  // Temporary 3v3 for LCD VDD (LOW-CURRENT ONLY!)
-#define PIN_FAKE3V3_MS5 3  // Temporary 3v3 for MS5837 VDD (LOW-CURRENT ONLY!)
+#define SENSOR_POWER    3  // Temporary 3v3 for MS5837 VDD (LOW-CURRENT ONLY!)
 
 // ===== SPI =====
 #define LCD_SPI_PORT spi0
@@ -36,5 +36,15 @@
  * @details Based on default RP2040 PiZero pinout
  */
 void bsp_i2c_init();
+
+/**
+ * @brief   Pressure Sensor initialization
+ */
+void bsp_ps_init();
+
+/**
+ * @brief   LCD initialization
+ */
+void bsp_lcd_init();
 
 #endif // BSP_HPP

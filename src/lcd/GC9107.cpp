@@ -38,11 +38,8 @@ static void rp_periph_init(void) {
     gpio_set_dir(PIN_LCD_TE, GPIO_IN);
     gpio_pull_down(PIN_LCD_TE); // panel will drive it; pull keeps defined level
 
-    // Temporary 3v3 on GPIO2 (LOW CURRENT ONLY!)
     // TODO: Check profit of TE line in this project
-    gpio_init(PIN_FAKE3V3_LCD);
-    gpio_set_dir(PIN_FAKE3V3_LCD, GPIO_OUT);
-    gpio_put(PIN_FAKE3V3_LCD, true);
+    bsp_lcd_init();
 }
 
 // Basic init

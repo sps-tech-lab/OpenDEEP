@@ -46,7 +46,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_SOURCE_DIR}/src/fonts
         ${CMAKE_SOURCE_DIR}/src/MS5837
         ${CMAKE_SOURCE_DIR}/src/i2c_tools
-        ext_boards/${EXT_BOARD}/bsp
+        bsp/${EXT_BOARD}/bsp
 )
 
 # Add pico_stdlib library which aggregates commonly used features

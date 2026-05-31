@@ -46,6 +46,10 @@
     {
       "name":            "Waveshare_rp2040_pizero",
       "configurePreset": "Waveshare_rp2040_pizero"
+    },
+    {
+      "name":            "OpenDEEP_rp2040_CNC",
+      "configurePreset": "OpenDEEP_rp2040_CNC"
     }
   ]
 }

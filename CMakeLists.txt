@@ -23,8 +23,8 @@ file(GLOB FONT_SOURCES
 # Add executables
 add_executable(${PROJECT_NAME}
         app/main.cpp
-        ext_boards/${EXT_BOARD}/bsp/bsp.cpp
-        ext_boards/${EXT_BOARD}/bsp/bsp.hpp
+        bsp/${EXT_BOARD}/bsp/bsp.cpp
+        bsp/${EXT_BOARD}/bsp/bsp.hpp
         src/platform/platform.cpp
         src/lcd/graphics.cpp
         src/lcd/bitmaps.cpp
@@ -72,5 +72,5 @@ include(cmake/pico_size_tool.cmake)
 # Add extension board (if it specified)
 if(DEFINED EXT_BOARD AND NOT EXT_BOARD STREQUAL "")
     message(STATUS "Using extension board [${EXT_BOARD}] specifics")
-    include(ext_boards/${EXT_BOARD}/ext_board.cmake)
+    include(bsp/${EXT_BOARD}/ext_board.cmake)
 endif()

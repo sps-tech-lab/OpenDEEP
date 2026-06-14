@@ -25,8 +25,10 @@
 #define LCD_SPI_HZ   (10 * 1000 * 1000) // start at 10 MHz; raise later if stable
 
 // ===== I2C =====
-#define PIN_I2C_SDA PICO_DEFAULT_I2C_SDA_PIN
-#define PIN_I2C_SCL PICO_DEFAULT_I2C_SCL_PIN
+#define BSP_I2C_PORT i2c0
+#define BSP_I2C_HZ   (400 * 1000)
+#define PIN_I2C_SDA  PICO_DEFAULT_I2C_SDA_PIN
+#define PIN_I2C_SCL  PICO_DEFAULT_I2C_SCL_PIN
 
 // ===== Optional: Wait for TE =====
 // #define USE_TE_SYNC 1

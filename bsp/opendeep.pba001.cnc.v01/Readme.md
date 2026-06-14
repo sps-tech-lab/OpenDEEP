@@ -3,6 +3,8 @@
 Board Support Package for the **opendeep.pba001.cnc.v01** board based on RP2040/RP2350 
 [Spotpear](https://spotpear.com/) Core modules.
 
+![board](./hw/opendeep.pba001.cnc.v01/docs/opendeep.pba001.cnc.v01_board.jpg)
+
 | Parameter | Value |
 |---|---|
 | Board ID | `opendeep.pba001.cnc.v01` |

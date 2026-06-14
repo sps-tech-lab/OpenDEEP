@@ -7,8 +7,7 @@
 #include "hardware/i2c.h"
 #include "pico/stdlib.h"
 
-// Port config TODO: move to bsp
-#define I2C_PORT i2c1
+#define I2C_PORT BSP_I2C_PORT
 
 // MS5837 basic commands
 // clang-format off
@@ -36,12 +35,10 @@ constexpr uint8_t MS5837_READ_PROM    = 0xA0;
 PresTempSensor::PresTempSensor() = default;
 
 bool PresTempSensor::init() {
-    gpio_init(PIN_FAKE3V3_MS5);
-    gpio_set_dir(PIN_FAKE3V3_MS5, GPIO_OUT);
-    gpio_put(PIN_FAKE3V3_MS5, true);
+    bsp_ps_init();
 
     sleep_ms(10);
-
+    printf("PTS>sleep_ms\n");
     uint8_t cmd = MS5837_RESET;
     auto ret = static_cast<int32_t>(i2c_write_blocking(I2C_PORT, MS5837_ADDRESS, &cmd, 1, false));
     printf("PresTempSensor reset %s\n", (ret >= PICO_OK) ? ("OK") : ("ERROR"));

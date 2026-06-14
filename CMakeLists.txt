@@ -23,8 +23,8 @@ file(GLOB FONT_SOURCES
 # Add executables
 add_executable(${PROJECT_NAME}
         app/main.cpp
-        ext_boards/${EXT_BOARD}/bsp/bsp.cpp
-        ext_boards/${EXT_BOARD}/bsp/bsp.hpp
+        bsp/${PRJ_BOARD}/bsp/bsp.cpp
+        bsp/${PRJ_BOARD}/bsp/bsp.hpp
         src/platform/platform.cpp
         src/lcd/graphics.cpp
         src/lcd/bitmaps.cpp
@@ -46,7 +46,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_SOURCE_DIR}/src/fonts
         ${CMAKE_SOURCE_DIR}/src/MS5837
         ${CMAKE_SOURCE_DIR}/src/i2c_tools
-        ext_boards/${EXT_BOARD}/bsp
+        bsp/${PRJ_BOARD}/bsp
 )
 
 # Add pico_stdlib library which aggregates commonly used features
@@ -70,7 +70,7 @@ pico_add_extra_outputs(${PROJECT_NAME})
 include(cmake/pico_size_tool.cmake)
 
 # Add extension board (if it specified)
-if(DEFINED EXT_BOARD AND NOT EXT_BOARD STREQUAL "")
-    message(STATUS "Using extension board [${EXT_BOARD}] specifics")
-    include(ext_boards/${EXT_BOARD}/ext_board.cmake)
+if(DEFINED PRJ_BOARD AND NOT PRJ_BOARD STREQUAL "")
+    message(STATUS "Using extension board [${PRJ_BOARD}] specifics")
+    include(bsp/${PRJ_BOARD}/bsp.cmake)
 endif()

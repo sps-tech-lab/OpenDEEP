@@ -88,7 +88,7 @@ static uint8_t reference_crc4(const uint16_t prom[8]) {
 
 void fake_bus_make_valid_prom(FakeMS5837& device, uint16_t c1, uint16_t c2, uint16_t c3, uint16_t c4, uint16_t c5,
                               uint16_t c6) {
-    device.prom[0] = 0;   // low 12 bits (factory data) unused by the driver
+    device.prom[0] = 0; // low 12 bits (factory data) unused by the driver
     device.prom[1] = c1;
     device.prom[2] = c2;
     device.prom[3] = c3;

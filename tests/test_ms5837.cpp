@@ -38,9 +38,9 @@ FakeMS5837 make_warm_device() {
 // Compensation, in double precision, including the <20C 2nd order flow
 void reference_temp_pressure(uint32_t d1, uint32_t d2, double& temperature_c, double& pressure_mbar) {
     const double dT = static_cast<double>(d2) - static_cast<double>(kC5) * 256.0;
-    const double temp = 2000.0 + dT * static_cast<double>(kC6) / 8388608.0;      // /2^23
-    const double off = static_cast<double>(kC2) * 131072.0 + kC4 * dT / 64.0;    // 2^17, /2^6
-    const double sens = static_cast<double>(kC1) * 65536.0 + kC3 * dT / 128.0;   // 2^16, /2^7
+    const double temp = 2000.0 + dT * static_cast<double>(kC6) / 8388608.0;    // /2^23
+    const double off = static_cast<double>(kC2) * 131072.0 + kC4 * dT / 64.0;  // 2^17, /2^6
+    const double sens = static_cast<double>(kC1) * 65536.0 + kC3 * dT / 128.0; // 2^16, /2^7
 
     double ti = 0.0;
     double offi = 0.0;

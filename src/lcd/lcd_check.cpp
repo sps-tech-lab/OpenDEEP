@@ -1,9 +1,9 @@
 //
 // Created by SPS on 30/10/2025.
 //
+#include "lcd_check.hpp"
 #include "GC9107.hpp"
 #include "bsp.hpp"
-#include "lcd_check.hpp"
 #include "pico/stdlib.h"
 
 // ---------------------------------------------------------

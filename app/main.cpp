@@ -3,8 +3,8 @@
 #include "MS5837.hpp"
 #include "bitmaps.hpp"
 #include "bsp.hpp"
-#include "demo.hpp"
 #include "lcd.hpp"
+#include "lcd_check.hpp"
 #include "pico/stdlib.h"
 
 // Framebuffer

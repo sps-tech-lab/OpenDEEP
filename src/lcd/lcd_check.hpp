@@ -10,6 +10,6 @@
 
 // Public interface
 uint16_t rgb888_to_565(uint8_t r, uint8_t g, uint8_t b);
-void lcd_demo(LCD* _lcd);
+void lcd_check(LCD* _lcd);
 
 #endif // DEMO_HPP

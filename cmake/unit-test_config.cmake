@@ -8,9 +8,6 @@ function(config_unit_tests)
     include(cmake/clang_tools.cmake)
     rp2_enable_clang_tools()
 
-    # Shared libraries
-    add_subdirectory(src/demo)
-
     enable_testing()
     add_subdirectory(tests)
 

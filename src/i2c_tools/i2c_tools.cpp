@@ -6,6 +6,7 @@
 #include <cstdio>
 #include "hardware/i2c.h"
 #include "lcd.hpp"
+#include "fonts.hpp"
 #include "pico/stdlib.h"
 
 // Addresses of the form 000 0xxx or 111 1xxx are reserved. No slave should

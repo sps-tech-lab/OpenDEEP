@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 3.19)
 
+# Tests
+include(cmake/unit-test_config.cmake)
+if(RP2_ENABLE_TESTS)
+    config_unit_tests()
+    return()
+endif()
+
 # Check [pico-sdk] and [picotool]
 include(cmake/bringup_helper.cmake)
 
@@ -31,8 +38,8 @@ add_executable(${PROJECT_NAME}
         src/lcd/lcd.cpp
         ${FONT_SOURCES}
         src/lcd/GC9107.cpp
-        src/lcd/demo.cpp
-        src/lcd/demo.hpp
+        src/lcd/lcd_check.cpp
+        src/lcd/lcd_check.hpp
         src/MS5837/MS5837.cpp
         src/MS5837/MS5837.hpp
         src/i2c_tools/i2c_tools.cpp

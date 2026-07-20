@@ -5,6 +5,7 @@
 ![License](https://img.shields.io/badge/license-GPLv3-green.svg?style=flat)
 ![CI](https://github.com/sps-tech-lab/OpenDEEP/actions/workflows/ci.yml/badge.svg?branch=main)
 ![clang-tidy](https://github.com/sps-tech-lab/OpenDEEP/actions/workflows/clang-tidy.yml/badge.svg?branch=main)
+![unit-tests](https://github.com/sps-tech-lab/OpenDEEP/actions/workflows/unit-tests.yml/badge.svg?branch=main)
 
 
 A battery-powered **free-diving depth gauge prototype** built end-to-end around **MS5837** pressure sensing.

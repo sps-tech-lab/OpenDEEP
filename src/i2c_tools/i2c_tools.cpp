@@ -4,6 +4,7 @@
 
 #include "i2c_tools.hpp"
 #include <cstdio>
+#include "fonts.hpp"
 #include "hardware/i2c.h"
 #include "lcd.hpp"
 #include "pico/stdlib.h"

@@ -1,7 +1,7 @@
 //
 // Created by SPS on 30/10/2025.
 //
-#include "demo.hpp"
+#include "lcd_check.hpp"
 #include "GC9107.hpp"
 #include "bsp.hpp"
 #include "pico/stdlib.h"
@@ -31,7 +31,7 @@ static uint16_t wheel565(uint8_t pos) {
 // ---------------------------------------------------------
 // Demo
 // ---------------------------------------------------------
-void lcd_demo(LCD* _lcd) {
+void lcd_check(LCD* _lcd) {
     // Solid colors
     _lcd->fillScreen(LCD_RED); // red
     _lcd->update();

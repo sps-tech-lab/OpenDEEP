@@ -34,6 +34,8 @@ constexpr uint8_t MS5837_READ_PROM    = 0xA0;
 
 PresTempSensor::PresTempSensor() = default;
 
+PresTempSensor::~PresTempSensor() = default;
+
 bool PresTempSensor::init() {
     bsp_ps_init();
 

@@ -10,8 +10,10 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(unit-tests
   test_ms5837.cpp
+  test_graphics.cpp
   support/fake_ms5837_bus.cpp
   ${CMAKE_SOURCE_DIR}/src/MS5837/MS5837.cpp
+  ${CMAKE_SOURCE_DIR}/src/lcd/graphics.cpp
 )
 
 # The driver under test includes Pico SDK / BSP headers. On the host we shadow
@@ -21,6 +23,8 @@ target_include_directories(unit-tests PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}/stubs
   ${CMAKE_CURRENT_LIST_DIR}/support
   ${CMAKE_SOURCE_DIR}/src/MS5837
+  ${CMAKE_SOURCE_DIR}/src/lcd
+  ${CMAKE_SOURCE_DIR}/src/fonts
 )
 
 target_compile_features(unit-tests PRIVATE cxx_std_20)

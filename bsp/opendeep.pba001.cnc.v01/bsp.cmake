@@ -8,3 +8,7 @@ target_compile_definitions(${PROJECT_NAME}
         PICO_DEFAULT_UART_BAUD_RATE=115200
 )
 
+# Route stdio printfover the usb
+pico_enable_stdio_uart(${PROJECT_NAME} 0)
+pico_enable_stdio_usb(${PROJECT_NAME} 1)
+

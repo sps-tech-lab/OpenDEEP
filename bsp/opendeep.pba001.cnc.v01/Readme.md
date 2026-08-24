@@ -98,7 +98,14 @@ UART TX pin, RX pin, and baudrate are taken from Pico SDK defaults:
 #define BSP_UART_BAUDRATE PICO_DEFAULT_UART_BAUD_RATE
 ```
 
-These values should be configured in `bsp.cmake`.
+## Console / stdio over USB
+
+To route `printf` over usb interface instead of uart pins, add to `bsp.cmake`:
+
+```cmake
+pico_enable_stdio_uart(${PROJECT_NAME} 0)
+pico_enable_stdio_usb(${PROJECT_NAME} 1)
+```
 
 ## BSP API
 

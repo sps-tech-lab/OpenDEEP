@@ -38,6 +38,16 @@
       }
     },
     {
+      "name":      "OpenDEEP_Simulator",
+      "binaryDir": "${sourceDir}/build/opendeep_sim001_mock",
+      "cacheVariables": {
+        "PRJ_BOARD": "opendeep.sim001.mock.v01",
+        "PRJ_HOST_SIM": "ON",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "FETCHCONTENT_BASE_DIR": "${sourceDir}/third_party/sdl2"
+      }
+    },
+    {
       "name": "unit-tests",
       "binaryDir": "${sourceDir}/build/unit-tests",
       "generator": "Ninja",
@@ -60,6 +70,10 @@
     {
       "name":            "OpenDEEP_rp2040_CNC",
       "configurePreset": "OpenDEEP_rp2040_CNC"
+    },
+    {
+      "name":            "Sim",
+      "configurePreset": "OpenDEEP_Simulator"
     },
     {
       "name": "unit-tests",

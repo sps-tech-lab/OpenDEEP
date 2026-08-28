@@ -7,6 +7,13 @@ if(RP2_ENABLE_TESTS)
     return()
 endif()
 
+# Visual simulator
+include(cmake/host_sim_config.cmake)
+if(PRJ_HOST_SIM)
+    config_host_sim()
+    return()
+endif()
+
 # Check [pico-sdk] and [picotool]
 include(cmake/bringup_helper.cmake)
 

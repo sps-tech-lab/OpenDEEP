@@ -1,14 +1,13 @@
 //
-// Created by SPS on 19/07/2026.
+// Created by :: SPS :: on 19/07/2026.
 //
-// Fake I2C bus implementation for MS5837 unit-tests
-//
-// This fake implements <hardware/i2c.h> helpers on the host and responds like real MS5837
-//
-//   * RESET (0x1E)                       -> acknowledged
-//   * READ_PROM (0xA0 + 2*i)             -> next read returns calibration word i
-//   * D1/D2 conversion (0x40.. / 0x50..) -> selects pressure / temperature ADC
-//   * ADC_READ (0x00)                    -> next read returns selected 24-bit value
+// @Brief:   Fake I2C bus implementation for MS5837 unit-tests
+// @Details: This fake implements <hardware/i2c.h> helpers on
+//           the host and responds like real MS5837
+//           * RESET (0x1E)                       -> acknowledged
+//           * READ_PROM (0xA0 + 2*i)             -> next read returns calibration word i
+//           * D1/D2 conversion (0x40.. / 0x50..) -> selects pressure / temperature ADC
+//           * ADC_READ (0x00)                    -> next read returns selected 24-bit value
 //
 #ifndef OPENDEEP_TEST_FAKE_MS5837_BUS_HPP
 #define OPENDEEP_TEST_FAKE_MS5837_BUS_HPP
@@ -26,6 +25,11 @@ void fake_bus_reset();
 
 // Attach an emulated MS5837
 void fake_bus_attach(const FakeMS5837& device);
+
+// Update only the ADC results of the attached device
+// Note: unlike fake_bus_attach() this preserves the in-flight command state, so
+// it is safe to call between a conversion command and the matching ADC read
+void fake_bus_set_adc(uint32_t d1_pressure, uint32_t d2_temperature);
 
 // Inject a transfer failure
 // the N-th I2C transfer returns PICO_ERROR_GENERIC

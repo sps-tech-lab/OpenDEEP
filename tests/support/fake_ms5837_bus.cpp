@@ -1,7 +1,9 @@
 //
-// Created by SPS on 19/07/2026.
+// Created by :: SPS :: on 19/07/2026.
 //
-// Fake I2C bus implementation for MS5837 unit-tests
+// @Brief:   Fake I2C bus implementation for MS5837 unit-tests
+// @Details: Also linked into the host simulator (bsp/opendeep.sim001.mock.v01)
+// @Warning: pico-sdk stubs, used by tests live in host_stubs.cpp now
 //
 #include "fake_ms5837_bus.hpp"
 #include "bsp.hpp"
@@ -100,14 +102,9 @@ void fake_bus_make_valid_prom(FakeMS5837& device, uint16_t c1, uint16_t c2, uint
     device.prom[0] = static_cast<uint16_t>(crc << 12);
 }
 
-// ---- Pico SDK host stubs -------------------------------------------------
-
-void sleep_ms(uint32_t /*ms*/) {
-    // No delay on the host
-}
-
-void bsp_ps_init() {
-    // Nothing to power up on the host
+void fake_bus_set_adc(uint32_t d1_pressure, uint32_t d2_temperature) {
+    g_state.device.d1_pressure = d1_pressure;
+    g_state.device.d2_temperature = d2_temperature;
 }
 
 // ---- Blocking I2C implementation ----------------------------------------

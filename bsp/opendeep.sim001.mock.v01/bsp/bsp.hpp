@@ -1,9 +1,9 @@
 //
 // Created by :: SPS :: on 27/08/2026.
 //
-// @Board: Virtual (host simulator)
-//         Mirrors pin map and peripheral configuration
-//         of [opendeep.pba001.cnc.v01]
+// @Board:   Virtual (host simulator)
+// @Details: Mirrors pin map and peripheral configuration
+//           of [opendeep.pba001.cnc.v01]
 //
 #ifndef BSP_HPP
 #define BSP_HPP

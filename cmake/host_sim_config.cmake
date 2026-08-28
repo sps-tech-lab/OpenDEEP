@@ -14,6 +14,7 @@ macro(config_host_sim)
     endif()
 
     message(STATUS "Configure host simulator [${PRJ_BOARD}]")
+
     project(OpenDEEP LANGUAGES C CXX)
 
     # Generate compile_commands.json

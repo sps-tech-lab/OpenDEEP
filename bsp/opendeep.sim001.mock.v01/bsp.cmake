@@ -7,6 +7,10 @@ set(SIM_DIR ${CMAKE_SOURCE_DIR}/bsp/${PRJ_BOARD}/sim)
 
 target_sources(${PROJECT_NAME}
         PRIVATE
+#        ${SIM_DIR}/src/sim_pico.cpp
+#        ${SIM_DIR}/src/sim_panel.cpp
+#        ${SIM_DIR}/src/sim_window.cpp
+#        ${SIM_DIR}/src/sim_sensor.cpp
         # Shared with the unit-tests
         ${CMAKE_SOURCE_DIR}/tests/support/fake_ms5837_bus.cpp
 )
@@ -50,7 +54,6 @@ endif()
 # Target names handle
 if(TARGET SDL2::SDL2-static)
     target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2-static)
-
 elseif(TARGET SDL2::SDL2)
     target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2)
 else()

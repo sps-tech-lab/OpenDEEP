@@ -48,6 +48,24 @@
 #define BSP_UART_RX_PIN   PICO_DEFAULT_UART_RX_PIN
 #define BSP_UART_BAUDRATE PICO_DEFAULT_UART_BAUD_RATE
 
+// Simulator
+
+// ===== Virtual panel geometry =====
+#define SIM_GRAM_WIDTH     128
+#define SIM_GRAM_HEIGHT    128
+#define SIM_PANEL_X_ORIGIN 0
+#define SIM_PANEL_Y_ORIGIN 13
+
+// ===== Panel wiring calibration =====
+#define SIM_PANEL_INVERTED  1
+#define SIM_PANEL_BGR_WIRED 1
+
+// ===== Panel orientation =====
+#define SIM_PANEL_MOUNT_ROTATION 180
+
+// ===== Window =====
+#define SIM_WINDOW_TITLE "OpenDEEP - Simulator"
+#define SIM_WINDOW_SCALE 1
 
 /**
  * @brief   I2C initialization

@@ -6,19 +6,22 @@
 #include <cstdio>
 #include "hardware/i2c.h"
 #include "pico/stdlib.h"
+#include "sim_sensor.hpp"
+#include "sim_window.hpp"
 
 void bsp_ps_init() {
     gpio_init(SENSOR_POWER);
     gpio_set_dir(SENSOR_POWER, GPIO_OUT);
     gpio_put(SENSOR_POWER, true);
 
-    //TODO: init sensor
+    sim_sensor_init();
 
     printf("[sim] MS5837 attached to fake I2C bus\n");
 }
 
 void bsp_lcd_init() {
-    //TODO: implement simulator window satart
+    //Simulator window start
+    sim_window_open(SIM_WINDOW_TITLE, GC9107_WIDTH, GC9107_HEIGHT, SIM_WINDOW_SCALE);
 }
 
 void bsp_i2c_init() {

@@ -45,8 +45,8 @@ static uint16_t fbuf[LCD_WIDTH * LCD_HEIGHT];
 
         uint32_t xpos = lcd.drawText(30, 28, &oswald_bold_48, LCD_DARKGREY, LCD_BLACK, 2, "%.1f", pts.depth());
         lcd.drawText(xpos, 56, &oswald_bold_20, LCD_DARKGREY, LCD_BLACK, 2, "m");
-        xpos = lcd.drawText(38, 90, &oswald_medium_16, RGB565(10, 10, 50), LCD_BLACK, 2, "%.2f", pts.temperature());
-        lcd.drawText(xpos, 90, &oswald_medium_16, RGB565(10, 10, 50), LCD_BLACK, 2, "'C");
+        xpos = lcd.drawText(38, 90, &oswald_medium_16, RGB565(0, 150, 225), LCD_BLACK, 2, "%.2f", pts.temperature());
+        lcd.drawText(xpos, 90, &oswald_medium_16, RGB565(0, 150, 225), LCD_BLACK, 2, "'C");
         lcd.update();
 
         sleep_ms(100);

@@ -7,10 +7,10 @@ set(SIM_DIR ${CMAKE_SOURCE_DIR}/bsp/${PRJ_BOARD}/sim)
 
 target_sources(${PROJECT_NAME}
         PRIVATE
-#        ${SIM_DIR}/src/sim_pico.cpp
-#        ${SIM_DIR}/src/sim_panel.cpp
-#        ${SIM_DIR}/src/sim_window.cpp
-#        ${SIM_DIR}/src/sim_sensor.cpp
+        ${SIM_DIR}/src/sim_pico.cpp
+        ${SIM_DIR}/src/sim_panel.cpp
+        ${SIM_DIR}/src/sim_window.cpp
+        ${SIM_DIR}/src/sim_sensor.cpp
         # Shared with the unit-tests
         ${CMAKE_SOURCE_DIR}/tests/support/fake_ms5837_bus.cpp
 )
